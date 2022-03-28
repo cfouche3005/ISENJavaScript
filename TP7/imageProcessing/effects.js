@@ -73,11 +73,38 @@ function contrast(width, height, oldPixels, newPixels, c){
 
 
 function edgeDetection(width, height, oldPixels, newPixels, threshold) {
+    let p =[];
+    let dg = 0;
+    let dd = 0;
+    let df = 0;
+    for(let y = 0; y < height; y++){
+        for(let x = 0; x < width; x++){
+            if (x == 0 || x == width ){
+                dd = (getLuminosity(p=getPixel(x,y-1,oldPixels,width))-getLuminosity(p=getPixel(x,y+1,oldPixels,width)));
+                df = Math.abs(dd);
+            }else{
+                if (y == 0 || y == height ){
+                    dg = (getLuminosity(p=getPixel(x-1,y,oldPixels,width))-getLuminosity(p=getPixel(x+1,y,oldPixels,width)));
+                    df = Math.abs(dg);
+                }else{
+                    dg = (getLuminosity(p=getPixel(x-1,y,oldPixels,width))-getLuminosity(p=getPixel(x+1,y,oldPixels,width)));
+                    Math.abs(dg);
+                    dd = (getLuminosity(p=getPixel(x,y-1,oldPixels,width))-getLuminosity(p=getPixel(x,y+1,oldPixels,width)));
+                    Math.abs(dd);
+                    df = dg + dd;
+                }
+            }
 
+            if (df > threshold){
+                p=[0,0,0,255];
+                setPixel(x,y,newPixels,p,width);
+            }else{
+                p=[255,255,255,255];
+                setPixel(x,y,newPixels,p,width);
+            }
+        }
+    }
 }
 
 
 export { clone, negative, mirror, grayscale, contrast, edgeDetection };
-
-
-
