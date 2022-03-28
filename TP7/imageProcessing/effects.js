@@ -30,7 +30,6 @@ function negative(width, height, oldPixels, newPixels){
 
 
 function mirror(width, height, oldPixels, newPixels){
-    let p =[];
     for(let i = 0; i < height; i++){
         for(let j = 0; j < width; j++){
             setPixel(j,i,newPixels,getPixel(width-j,i,oldPixels,width),width);
@@ -59,7 +58,17 @@ function grayscale(width, height, oldPixels, newPixels){
 
 
 function contrast(width, height, oldPixels, newPixels, c){
-
+    let p =[];
+    let F = ((259*(c+255))/(255*(259-c)));
+    for(let i = 0; i < height; i++){
+        for(let j = 0; j < width; j++){
+            p = getPixel(j,i,oldPixels,width);
+            p[0] = ((p[0]-128)*F+128) ;
+            p[1] = ((p[1]-128)*F+128);
+            p[2] = ((p[2]-128)*F+128);
+            setPixel(j,i,newPixels,p,width);
+        }
+    }
 }
 
 
