@@ -1,0 +1,24 @@
+.selected{
+    border : 10px cyan solid;
+}
+p{
+    margin : 10px;
+    padding : 10px;
+}
+.red{
+    background-color: red;
+}
+
+.green{
+    background-color: green;
+    color : white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blue{
+    background-color: blue;
+    color : white;
+}
